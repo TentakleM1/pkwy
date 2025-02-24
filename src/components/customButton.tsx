@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import { Pressable, PressableProps, StyleProp, StyleSheet, ViewStyle } from 'react-native';
+import { Pressable, PressableProps, StyleProp, StyleSheet, TextStyle, ViewStyle } from 'react-native';
 import { CustomText } from './customText';
 
 type Props = PressableProps & {
     title: string;
     style?: {
       button: StyleProp<ViewStyle>,
-      text: StyleProp<ViewStyle>,
+      text: StyleProp<TextStyle>,
     }
 }
 
