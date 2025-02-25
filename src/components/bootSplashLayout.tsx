@@ -1,6 +1,7 @@
 import React, {FC, useState} from 'react';
-import { StyleSheet, View} from 'react-native';
+import { View} from 'react-native';
 import { AnimatedBootSplash } from './animatedBootSplash';
+import styles from './bootSplashLayout.style';
 
 type Props = {
   children: React.ReactNode;
@@ -22,9 +23,3 @@ export const BootSplashLayout: FC<Props> = propos => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

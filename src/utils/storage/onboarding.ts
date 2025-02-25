@@ -1,6 +1,5 @@
 import SecureStorage from 'react-native-fast-secure-storage';
-
-const ONBOARDING_KEY = 'onboarding';
+import { ONBOARDING_KEY } from '../../constant/storage';
 
 export const getOnboardingStorage = () => {
     const isOnboarding = SecureStorage.getItemSync(ONBOARDING_KEY);

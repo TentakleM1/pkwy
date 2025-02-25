@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import BootSplash from 'react-native-bootsplash';
-import {StyleSheet, useWindowDimensions} from 'react-native';
+import {useWindowDimensions} from 'react-native';
 import Animated, {
   useSharedValue,
   withTiming,
@@ -8,8 +8,9 @@ import Animated, {
   withSequence,
   withDelay,
 } from 'react-native-reanimated';
+import styles from './animatedBootSplash.style';
 
-const DURATION_ANIMATED = 500;
+const DURATION_ANIMATED = 400;
 
 type Props = {
   onAnimationEnd(): void;
@@ -40,12 +41,12 @@ export const AnimatedBootSplash: FC<Props> = props => {
     animate: () => {
       positionY.value = withSequence(
         withTiming(positionY.value - 20, {
-            duration: DURATION_ANIMATED / 2,
-          }),
+          duration: DURATION_ANIMATED / 2,
+        }),
         withTiming(heightDimensions, {duration: DURATION_ANIMATED}),
       );
 
-        opacity.value = withDelay(DURATION_ANIMATED / 2, withTiming(0));
+      opacity.value = withDelay(DURATION_ANIMATED / 2, withTiming(0));
 
       setTimeout(() => {
         props.onAnimationEnd();
@@ -61,10 +62,3 @@ export const AnimatedBootSplash: FC<Props> = props => {
     </Animated.View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#13693B',
-  },
-});

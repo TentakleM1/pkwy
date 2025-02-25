@@ -1,103 +1,119 @@
 import React, {FC} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
-import {CustomButton} from '../components';
+import {Image, View} from 'react-native';
+import {CustomButton, CustomText} from '../components';
+import Carousel, {
+  ICarouselInstance,
+  Pagination,
+} from 'react-native-reanimated-carousel';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
-  withSpring,
+  withTiming,
 } from 'react-native-reanimated';
-import { OnBoardingLayout, OneStepOnBoarding } from '../feature';
+import {OnBoardingLayout} from '../feature';
+import styles from './onboarding.style';
+import {WIDTH_SCREEN} from '../constant/constant';
+import {setOnboardingStorage} from '../utils/storage/onboarding';
+import {useNavigation} from '@react-navigation/native';
+import {onboardingOne, onboardingThree, onboardingTwo} from '../assets';
 
-const items = [
-  {color: '#FFE780'},
-  {color: '#87CCE8'},
-  {color: '#FFA3A1'},
-  {color: '#B1DFD0'},
+const items: {url: number; title: string; info: string}[] = [
+  {
+    url: onboardingOne,
+    title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
+    info: "PKWY Tavern and Ritchie McNeely's are more than pubs. We provide places for gathering for wide variety of visitors.",
+  },
+  {
+    url: onboardingTwo,
+    title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
+    info: "Let's take part in different activities, buy more and you will be rewarded.",
+  },
+  {
+    url: onboardingThree,
+    title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
+    info: "Let's take part in different activities, buy more and you will be rewarded.",
+  },
 ];
 
-const WIDTH = Dimensions.get('window').width;
+const HEIGHT = 550;
 
 export const OnBoardingScreen: FC = () => {
-  const offset = useSharedValue<number>(0);
+  const ref = React.useRef<ICarouselInstance>(null);
+  const progress = useSharedValue<number>(0);
+  const opacity = useSharedValue<number>(1);
+  const navigation = useNavigation().getParent();
 
-  const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{translateX: offset.value}],
-  }));
+  const onPressPagination = (index: number) => {
+    if (index === items.length) {
+      handleSkipOnboarding();
+    }
 
-  const advanceBy = () => {
-    const newOffset = offset.value + WIDTH * -1;
-
-    offset.value = withSpring(newOffset, {
-      restDisplacementThreshold: 5,
-      restSpeedThreshold: 5,
+    ref.current?.scrollTo({
+      count: index - progress.value,
+      animated: true,
     });
+  };
+
+  const buttonHideStyle = useAnimatedStyle(() => {
+    return {
+      opacity: withTiming(opacity.value, {duration: 500}),
+    };
+  });
+
+  const handleSkipOnboarding = () => {
+    setOnboardingStorage(true);
+    navigation?.navigate('SignUp');
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.containerSkip}>
-        <CustomButton title="SKIP" style={{button: styles.button, text: styles.text}} />
-      </View>
-      <View style={styles.containerTest}>
-        <Animated.View style={[styles.row, animatedStyles]}>
-          {items.map(item => (
-            <OnBoardingLayout
-              key={item.color}
-              title="View events from Ritchie McNeely's and PKWY Tavern locations"
-              info="PKWY Tavern and Ritchie McNeely's are more than pubs. We provide
-          places for gathering for wide variety of visitors.">
-              <OneStepOnBoarding />
+      <Animated.View style={[styles.containerSkip, buttonHideStyle]}>
+        <CustomButton style={styles.buttonSkip} onPress={handleSkipOnboarding}>
+          <CustomText style={styles.textSkip}>SKIP</CustomText>
+        </CustomButton>
+      </Animated.View>
+      <View style={styles.containerCarousel}>
+        <Carousel
+          ref={ref}
+          height={HEIGHT}
+          width={WIDTH_SCREEN}
+          data={items}
+          fixedDirection={'negative'}
+          onProgressChange={(_, absoluteProgress) => {
+            const roundedAbsoluteProgress = Math.round(absoluteProgress);
+            if (roundedAbsoluteProgress === 2) {
+              opacity.value = 0;
+            }
+            if (roundedAbsoluteProgress < 2) {
+              opacity.value = 1;
+            }
+            progress.value = absoluteProgress;
+          }}
+          renderItem={item => (
+            <OnBoardingLayout title={item.item.title} info={item.item.info}>
+              <Image source={item.item.url} style={styles.sizeImage} />
             </OnBoardingLayout>
-          ))}
-        </Animated.View>
+          )}
+        />
       </View>
-
-      <View style={styles.containerStep}></View>
+      <View style={styles.containerStep}>
+        <Pagination.Basic
+          progress={progress}
+          data={items}
+          dotStyle={styles.dot}
+          containerStyle={styles.constainerPagination}
+          onPress={onPressPagination}
+        />
+      </View>
       <View style={styles.containerContinue}>
-        <CustomButton title="Continue" onPress={advanceBy} />
+        <CustomButton
+          style={styles.button}
+          onPress={() => onPressPagination(progress.value + 1)}>
+          <CustomText h2 style={styles.text}>
+            Continue
+          </CustomText>
+        </CustomButton>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#E7F0E5',
-  },
-
-  button: {
-    backgroundColor: 'none',
-  },
-
-  text: {
-    color: '#13693B',
-    fontSize: 12,
-  },
-
-  containerTest: {
-    flex: 5,
-  },
-
-  containerSkip: {
-    flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    marginHorizontal: 24,
-  },
-
-  containerStep: {
-    flex: 1,
-    marginHorizontal: 24,
-  },
-
-  containerContinue: {
-    flex: 1,
-    marginHorizontal: 24,
-  },
-
-  row: {
-    height: '100%',
-    flexDirection: 'row',
-  },
-});
