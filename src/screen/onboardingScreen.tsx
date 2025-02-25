@@ -1,51 +1,53 @@
 import React, {FC} from 'react';
-import {Dimensions, Image, StyleSheet, View} from 'react-native';
-import {CustomButton} from '../components';
+import {Image, View} from 'react-native';
+import {CustomButton, CustomText} from '../components';
 import Carousel, {
   ICarouselInstance,
   Pagination,
 } from 'react-native-reanimated-carousel';
 import Animated, {
-  Extrapolation,
-  interpolate,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import {OnBoardingLayout} from '../feature';
-import {withAnchorPoint} from '../utils/paralax';
+import styles from './onboarding.style';
+import {WIDTH_SCREEN} from '../constant/constant';
+import {setOnboardingStorage} from '../utils/storage/onboarding';
+import {useNavigation} from '@react-navigation/native';
+import {onboardingOne, onboardingThree, onboardingTwo} from '../assets';
 
 const items: {url: number; title: string; info: string}[] = [
   {
-    url: require('../assets/onboarding/onboarding_1.png'),
+    url: onboardingOne,
     title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
     info: "PKWY Tavern and Ritchie McNeely's are more than pubs. We provide places for gathering for wide variety of visitors.",
   },
   {
-    url: require('../assets/onboarding/onboarding_2.png'),
+    url: onboardingTwo,
     title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
     info: "Let's take part in different activities, buy more and you will be rewarded.",
   },
   {
-    url: require('../assets/onboarding/onboarding_3.png'),
+    url: onboardingThree,
     title: "Rewards from Ritchie McNeely's and PKWY Tavern in one app",
     info: "Let's take part in different activities, buy more and you will be rewarded.",
   },
 ];
 
-const WIDTH = Dimensions.get('window').width;
+const HEIGHT = 550;
 
 export const OnBoardingScreen: FC = () => {
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
   const opacity = useSharedValue<number>(1);
-  const baseOptions = {
-    vertical: false,
-    width: WIDTH,
-    height: WIDTH * 0.6,
-  } as const;
+  const navigation = useNavigation().getParent();
 
   const onPressPagination = (index: number) => {
+    if (index === items.length) {
+      handleSkipOnboarding();
+    }
+
     ref.current?.scrollTo({
       count: index - progress.value,
       animated: true,
@@ -58,82 +60,38 @@ export const OnBoardingScreen: FC = () => {
     };
   });
 
+  const handleSkipOnboarding = () => {
+    setOnboardingStorage(true);
+    navigation?.navigate('SignUp');
+  };
+
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.containerSkip, buttonHideStyle]}>
-        <CustomButton
-          title="SKIP"
-          style={{button: styles.button, text: styles.text}}
-        />
+        <CustomButton style={styles.buttonSkip} onPress={handleSkipOnboarding}>
+          <CustomText style={styles.textSkip}>SKIP</CustomText>
+        </CustomButton>
       </Animated.View>
-      <View style={styles.containerTest}>
+      <View style={styles.containerCarousel}>
         <Carousel
           ref={ref}
-          height={550}
-          width={WIDTH}
+          height={HEIGHT}
+          width={WIDTH_SCREEN}
           data={items}
-          customAnimation={(value: number) => {
-            'worklet';
-            const size = WIDTH;
-            const scale = interpolate(
-              value,
-              [-2, -1, 0, 1, 2],
-              [1.7, 1.2, 1, 1.2, 1.7],
-              Extrapolation.CLAMP,
-            );
-
-            const translate =
-              interpolate(
-                value,
-                [-2, -1, 0, 1, 2],
-                [-size * 1.45, -size * 0.9, 0, size * 0.9, size * 1.45],
-              );
-
-            const transform = {
-              transform: [
-                {scale},
-                {
-                  translateX: translate,
-                },
-                {perspective: 150},
-                {
-                  rotateY: `${interpolate(
-                    value,
-                    [-1, 0, 1],
-                    [30, 0, -30],
-                    Extrapolation.CLAMP,
-                  )}deg`,
-                },
-              ],
-            };
-
-            return {
-              ...withAnchorPoint(
-                transform,
-                {x: 0.3, y: 0.5},
-                {
-                  width: baseOptions.width,
-                  height: baseOptions.height,
-                },
-              ),
-            };
-          }}
-          scrollAnimationDuration={1200}
+          fixedDirection={'negative'}
           onProgressChange={(_, absoluteProgress) => {
-            if (Math.round(absoluteProgress) === 2) {
+            const roundedAbsoluteProgress = Math.round(absoluteProgress);
+            if (roundedAbsoluteProgress === 2) {
               opacity.value = 0;
             }
-            if (Math.round(absoluteProgress) < 2) {
+            if (roundedAbsoluteProgress < 2) {
               opacity.value = 1;
             }
             progress.value = absoluteProgress;
           }}
           renderItem={item => (
             <OnBoardingLayout title={item.item.title} info={item.item.info}>
-              <Image
-                source={item.item.url}
-                style={{width: WIDTH, height: 323}}
-              />
+              <Image source={item.item.url} style={styles.sizeImage} />
             </OnBoardingLayout>
           )}
         />
@@ -142,57 +100,20 @@ export const OnBoardingScreen: FC = () => {
         <Pagination.Basic
           progress={progress}
           data={items}
-          dotStyle={{
-            backgroundColor: 'rgba(19, 105, 59, 0.20)',
-            borderRadius: 50,
-          }}
-          containerStyle={{gap: 5}}
+          dotStyle={styles.dot}
+          containerStyle={styles.constainerPagination}
           onPress={onPressPagination}
         />
       </View>
       <View style={styles.containerContinue}>
         <CustomButton
-          title="Continue"
-          onPress={() => onPressPagination(progress.value + 1)}
-        />
+          style={styles.button}
+          onPress={() => onPressPagination(progress.value + 1)}>
+          <CustomText h2 style={styles.text}>
+            Continue
+          </CustomText>
+        </CustomButton>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#E7F0E5',
-  },
-
-  button: {
-    backgroundColor: 'none',
-  },
-
-  text: {
-    color: '#13693B',
-    fontSize: 12,
-  },
-
-  containerTest: {
-    flex: 5,
-  },
-
-  containerSkip: {
-    flex: 1,
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    marginHorizontal: 24,
-  },
-
-  containerStep: {
-    flex: 1,
-    marginHorizontal: 24,
-  },
-
-  containerContinue: {
-    flex: 1,
-    marginHorizontal: 24,
-  },
-});
