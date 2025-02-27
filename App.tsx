@@ -4,6 +4,8 @@ import {RootNavigation} from './src/navigation/rootNaigation';
 import {BootSplashLayout} from './src/components';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Alert} from 'react-native';
+import StoryBook from './.storybook';
+import { STORYBOOK } from './config';
 
 const linking = {
   prefixes: ['pkwy://'],
@@ -13,8 +15,8 @@ const linking = {
     }
   },
 };
-
-export default function App() {
+console.log(process.env.STORYBOOK)
+const App = () => {
   return (
     <BootSplashLayout>
       <GestureHandlerRootView>
@@ -24,4 +26,6 @@ export default function App() {
       </GestureHandlerRootView>
     </BootSplashLayout>
   );
-}
+};
+
+export default STORYBOOK ? StoryBook : App;

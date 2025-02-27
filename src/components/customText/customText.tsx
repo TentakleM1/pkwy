@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Text, TextProps} from 'react-native';
-import { fontSize } from '../styles/global.style';
+import { fontSize } from '../../styles/global.style';
 
 type Props = TextProps & {
   h1?: boolean;

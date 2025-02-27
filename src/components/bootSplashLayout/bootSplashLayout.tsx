@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import { View} from 'react-native';
-import { AnimatedBootSplash } from './animatedBootSplash';
+import { AnimatedBootSplash } from '../animatedBootSplash/animatedBootSplash';
 import styles from './bootSplashLayout.style';
 
 type Props = {

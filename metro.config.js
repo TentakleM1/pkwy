@@ -1,12 +1,13 @@
 const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
-const {
-  wrapWithReanimatedMetroConfig,
-} = require('react-native-reanimated/metro-config');
+const path = require('path');
+const withStorybook = require('@storybook/react-native/metro/withStorybook');
+const defaultConfig = getDefaultConfig(__dirname);
 
-const config = {
-  // Your existing Metro configuration options
-};
+const config = {};
 
-module.exports = wrapWithReanimatedMetroConfig(
-  mergeConfig(getDefaultConfig(__dirname), config),
-);
+const finalConfig = mergeConfig(defaultConfig, config);
+
+module.exports = withStorybook(finalConfig, {
+  enabled: true,
+  configPath: path.resolve(__dirname, './.storybook'),
+});

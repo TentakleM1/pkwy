@@ -4,14 +4,13 @@ import {
   Pressable,
   PressableProps,
   StyleProp,
-  StyleSheet,
   TextInput,
   TextInputProps,
   View,
   ViewStyle,
 } from 'react-native';
-import { color } from '../styles/color.style';
-import { show, showing } from '../assets';
+import { show, showing } from '../../assets';
+import { styles } from './input.style';
 
 type Props = TextInputProps & PressableProps & {
   style?: StyleProp<ViewStyle>;
@@ -38,21 +37,3 @@ export const Input: FC<Props> = props => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: 52,
-    borderColor: color.xanadu,
-    borderRadius: 8,
-    borderWidth: 1,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-  },
-
-  input: {
-    width: '85%',
-  },
-});

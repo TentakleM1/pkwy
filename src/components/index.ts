@@ -1,5 +1,5 @@
-export { Input } from './input';
-export { CustomButton } from './customButton';
-export { AnimatedBootSplash } from './animatedBootSplash';
-export { BootSplashLayout } from './bootSplashLayout';
-export { CustomText } from './customText';
+export { Input } from './input/input';
+export { CustomButton } from './customButton/customButton';
+export { AnimatedBootSplash } from './animatedBootSplash/animatedBootSplash';
+export { BootSplashLayout } from './bootSplashLayout/bootSplashLayout';
+export { CustomText } from './customText/customText';
