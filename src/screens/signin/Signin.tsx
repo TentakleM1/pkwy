@@ -6,7 +6,7 @@ import CustomButton from 'src/components/customButton/CustomButton';
 import CustomForm from 'src/components/customForm/CustomForm';
 import CustomText from 'src/components/customText/CustomText';
 
-export const SignIn: FC = () => {
+const SignIn: FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containerTitle}>
@@ -46,3 +46,5 @@ export const SignIn: FC = () => {
     </View>
   );
 };
+
+export default SignIn;

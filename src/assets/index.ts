@@ -5,5 +5,15 @@ const facebook = require('./badge/facebook.png');
 const onboardingOne = require('./onboarding/onboarding_1.png');
 const onboardingTwo = require('./onboarding/onboarding_2.png');
 const onboardingThree = require('./onboarding/onboarding_3.png');
+const stock = require('./video/stock.mp4');
 
-export {show, showing, apple, facebook, onboardingOne, onboardingTwo, onboardingThree};
+export {
+  stock,
+  show,
+  showing,
+  apple,
+  facebook,
+  onboardingOne,
+  onboardingTwo,
+  onboardingThree,
+};

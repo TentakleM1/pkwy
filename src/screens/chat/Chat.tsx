@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 
-export const Chat: FC = () => {
+const Chat: FC = () => {
   // const [ws, setWs] = useState<WebSocket | null>(null);
 
   // useEffect(() => {
@@ -51,6 +51,8 @@ export const Chat: FC = () => {
     </View>
   );
 };
+
+export default Chat;
 
 const styles = StyleSheet.create({
   container: {

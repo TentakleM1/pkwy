@@ -1,4 +1,4 @@
-import { NavigationProp } from "@react-navigation/native";
+import {NavigationProp} from '@react-navigation/native';
 
 export enum Route {
   Auth = 'Auth',
@@ -6,6 +6,7 @@ export enum Route {
   SignUp = 'SignUp',
   Onboarding = 'Onboarding',
   Map = 'Map',
+  Video = 'Video',
 }
 
 export type RootStackParamListType = {
@@ -17,6 +18,7 @@ export type AuthStackParamListType = {
   SignUp: undefined;
   Onboarding: undefined;
   Map: undefined;
+  Video: undefined;
 };
 
 export type AuthStackNavigation = NavigationProp<AuthStackParamListType>;
