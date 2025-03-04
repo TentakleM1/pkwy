@@ -10,7 +10,7 @@ const VideoPlayer: FC = () => {
 
   return (
     <View style={globalStyles.flex}>
-      <Video ref={videoRef} source={stock} style={styles.backgroundVideo} repeat />
+      <Video ref={videoRef} source={stock} style={styles.backgroundVideo} repeat controls />
     </View>
   );
 };
