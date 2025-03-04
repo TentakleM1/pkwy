@@ -1,4 +1,14 @@
 {
   "name": "pkwy",
-  "displayName": "pkwy"
+  "displayName": "pkwy",
+  "expo": {
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow pkwy to use your location."
+        }
+      ]
+    ]
+  }
 }

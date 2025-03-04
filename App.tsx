@@ -1,17 +1,18 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {RootNavigation} from './src/navigation/rootNaigation';
-import {BootSplashLayout} from './src/components';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import StoryBook from './.storybook';
+import {STORYBOOK} from './config';
+import BootSplashLayout from 'src/components/bootSplashLayout/BootSplashLayout';
 
-export default function App() {
+const App = () => {
   return (
     <BootSplashLayout>
       <GestureHandlerRootView>
-        <NavigationContainer>
-          <RootNavigation />
-        </NavigationContainer>
+        <RootNavigation />
       </GestureHandlerRootView>
     </BootSplashLayout>
   );
-}
+};
+
+export default STORYBOOK ? StoryBook : App;
