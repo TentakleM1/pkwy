@@ -1,13 +1,13 @@
 import React, {FC, useState} from 'react';
-import { View} from 'react-native';
-import { AnimatedBootSplash } from '../animatedBootSplash/animatedBootSplash';
-import styles from './bootSplashLayout.style';
+import {View} from 'react-native';
+import styles from './BootSplashLayout.styles';
+import AnimatedBootSplash from '../animatedBootSplash/AnimatedBootSplash';
 
 type Props = {
   children: React.ReactNode;
 };
 
-export const BootSplashLayout: FC<Props> = propos => {
+const BootSplashLayout: FC<Props> = propos => {
   const [isVisible, setIsVisisble] = useState(true);
 
   return (
@@ -23,3 +23,5 @@ export const BootSplashLayout: FC<Props> = propos => {
     </View>
   );
 };
+
+export default BootSplashLayout;

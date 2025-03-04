@@ -1,9 +1,11 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
-import {CustomButton, CustomText, Input} from '../../components';
-import styles from './customForm.style';
+import styles from './CustomForm.styles';
+import CustomButton from '../customButton/CustomButton';
+import CustomText from '../customText/CustomText';
+import Input from '../input/Input';
 
-export const CustomForm: FC = () => {
+const CustomForm: FC = () => {
   return (
     <View style={styles.container}>
       <View>
@@ -32,3 +34,5 @@ export const CustomForm: FC = () => {
     </View>
   );
 };
+
+export default CustomForm;

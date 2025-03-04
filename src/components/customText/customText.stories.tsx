@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import type {Meta, StoryObj} from '@storybook/react';
-import {CustomText} from './customText';
+import CustomText from './CustomText';
 
 const meta = {
   title: 'CustomText',

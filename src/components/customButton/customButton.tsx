@@ -1,11 +1,6 @@
 import React, {FC} from 'react';
-import {
-  Pressable,
-  PressableProps,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
-import styles from './customButton.style';
+import {Pressable, PressableProps, StyleProp, ViewStyle} from 'react-native';
+import styles from './CustomButton.styles';
 
 type Props = PressableProps & {
   style?: StyleProp<ViewStyle>;
@@ -13,10 +8,10 @@ type Props = PressableProps & {
 
 export const CustomButton: FC<Props> = props => {
   return (
-    <Pressable
-      {...props}
-      style={[styles.button, props.style && props.style]}>
+    <Pressable {...props} style={[styles.button, props.style && props.style]}>
       {props.children}
     </Pressable>
   );
 };
+
+export default CustomButton;

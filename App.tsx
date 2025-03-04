@@ -1,28 +1,15 @@
 import React from 'react';
-import { NavigationContainer} from '@react-navigation/native';
 import {RootNavigation} from './src/navigation/rootNaigation';
-import {BootSplashLayout} from './src/components';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {Alert} from 'react-native';
 import StoryBook from './.storybook';
-import { STORYBOOK } from './config';
+import {STORYBOOK} from './config';
+import BootSplashLayout from 'src/components/bootSplashLayout/BootSplashLayout';
 
-const linking = {
-  prefixes: ['pkwy://'],
-  getStateFromPath: (path: string) => {
-    if (path) {
-      Alert.alert('', path);
-    }
-  },
-};
-console.log(process.env.STORYBOOK)
 const App = () => {
   return (
     <BootSplashLayout>
       <GestureHandlerRootView>
-        <NavigationContainer linking={linking}>
-          <RootNavigation />
-        </NavigationContainer>
+        <RootNavigation />
       </GestureHandlerRootView>
     </BootSplashLayout>
   );

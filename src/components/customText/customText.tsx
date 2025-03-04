@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Text, TextProps} from 'react-native';
-import { fontSize } from '../../styles/global.style';
+import { fontSize } from 'src/styles/global.styles';
 
 type Props = TextProps & {
   h1?: boolean;
@@ -9,7 +9,7 @@ type Props = TextProps & {
   h4?: boolean
 };
 
-export const CustomText: FC<Props> = props => {
+const CustomText: FC<Props> = props => {
   return (
     <Text
       {...props}
@@ -24,3 +24,5 @@ export const CustomText: FC<Props> = props => {
     </Text>
   );
 };
+
+export default CustomText;

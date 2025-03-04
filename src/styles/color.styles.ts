@@ -1,6 +1,7 @@
 export const color = {
   darkJade: '#13693B',
   white: '#FFFFFF',
+  black: '#000000',
   xanadu: '#838B86',
   mintTint: '#E7F0E5',
   transparentDeepGreen: 'rgba(19, 105, 59, 0.20)',

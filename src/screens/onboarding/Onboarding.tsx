@@ -1,6 +1,5 @@
 import React, {FC} from 'react';
 import {Image, View} from 'react-native';
-import {CustomButton, CustomText} from '../components';
 import Carousel, {
   ICarouselInstance,
   Pagination,
@@ -10,12 +9,15 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {OnBoardingLayout} from '../feature';
-import styles from './onboarding.style';
-import {WIDTH_SCREEN} from '../constant/constant';
-import {setOnboardingStorage} from '../utils/storage/onboarding';
+import styles from './Onboarding.styles';
 import {useNavigation} from '@react-navigation/native';
-import {onboardingOne, onboardingThree, onboardingTwo} from '../assets';
+import {onboardingOne, onboardingThree, onboardingTwo} from 'src/assets';
+import {AuthStackNavigation, Route} from 'src/types/navigation';
+import {HEIGHT_SCREEN, WIDTH_SCREEN} from 'src/constants/constant';
+import CustomButton from 'src/components/customButton/CustomButton';
+import CustomText from 'src/components/customText/CustomText';
+import OnboardingLayout from 'src/components/onboardingLayout/OnboardingLayout';
+import {setOnboardingStorage} from 'src/utils/storage/onboarding';
 
 const items: {url: number; title: string; info: string}[] = [
   {
@@ -35,13 +37,11 @@ const items: {url: number; title: string; info: string}[] = [
   },
 ];
 
-const HEIGHT = 550;
-
-export const OnBoardingScreen: FC = () => {
+const Onboarding: FC = () => {
   const ref = React.useRef<ICarouselInstance>(null);
   const progress = useSharedValue<number>(0);
   const opacity = useSharedValue<number>(1);
-  const navigation = useNavigation().getParent();
+  const {navigate} = useNavigation<AuthStackNavigation>();
 
   const onPressPagination = (index: number) => {
     if (index === items.length) {
@@ -62,7 +62,7 @@ export const OnBoardingScreen: FC = () => {
 
   const handleSkipOnboarding = () => {
     setOnboardingStorage(true);
-    navigation?.navigate('SignUp');
+    navigate(Route.Map);
   };
 
   return (
@@ -75,7 +75,7 @@ export const OnBoardingScreen: FC = () => {
       <View style={styles.containerCarousel}>
         <Carousel
           ref={ref}
-          height={HEIGHT}
+          height={HEIGHT_SCREEN}
           width={WIDTH_SCREEN}
           data={items}
           fixedDirection={'negative'}
@@ -90,9 +90,9 @@ export const OnBoardingScreen: FC = () => {
             progress.value = absoluteProgress;
           }}
           renderItem={item => (
-            <OnBoardingLayout title={item.item.title} info={item.item.info}>
+            <OnboardingLayout title={item.item.title} info={item.item.info}>
               <Image source={item.item.url} style={styles.sizeImage} />
-            </OnBoardingLayout>
+            </OnboardingLayout>
           )}
         />
       </View>
@@ -117,3 +117,5 @@ export const OnBoardingScreen: FC = () => {
     </View>
   );
 };
+
+export default Onboarding;

@@ -1,13 +1,14 @@
 module.exports = {
-  presets: ['module:@react-native/babel-preset'],
+  presets: ['babel-preset-expo'],
   plugins: [
     'react-native-reanimated/plugin',
     [
-      'module:react-native-dotenv',
+      'module-resolver',
       {
-        envName: 'STORYBOOK',
-        path: '.env',
-        allowUndefined: false,
+        root: ['./src'],
+        alias: {
+          src: './src',
+        },
       },
     ],
   ],

@@ -1,3 +1,5 @@
+import {StyleSheet} from 'react-native';
+
 export const fontSize = {
   h1: {
     fontSize: 20,
@@ -15,3 +17,9 @@ export const fontSize = {
     fontSize: 12,
   },
 };
+
+export const globalStyles = StyleSheet.create({
+  flex: {
+    flex: 1,
+  },
+});

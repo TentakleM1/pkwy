@@ -9,15 +9,15 @@ import {
   View,
   ViewStyle,
 } from 'react-native';
-import { show, showing } from '../../assets';
-import { styles } from './input.style';
+import { show, showing } from 'src/assets';
+import { styles } from './Input.style';
 
 type Props = TextInputProps & PressableProps & {
   style?: StyleProp<ViewStyle>;
   isPassword?: boolean;
 };
 
-export const Input: FC<Props> = props => {
+const Input: FC<Props> = props => {
   return (
     <View style={[styles.container, props.style]}>
       <TextInput {...props} style={styles.input} />
@@ -37,3 +37,5 @@ export const Input: FC<Props> = props => {
     </View>
   );
 };
+
+export default Input;

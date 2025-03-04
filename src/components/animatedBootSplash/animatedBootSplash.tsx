@@ -8,7 +8,7 @@ import Animated, {
   withSequence,
   withDelay,
 } from 'react-native-reanimated';
-import styles from './animatedBootSplash.style';
+import styles from './AnimatedBootSplash.styles';
 
 const DURATION_ANIMATED = 400;
 
@@ -16,7 +16,7 @@ type Props = {
   onAnimationEnd(): void;
 };
 
-export const AnimatedBootSplash: FC<Props> = props => {
+const AnimatedBootSplash: FC<Props> = props => {
   const opacity = useSharedValue(1);
   const positionY = useSharedValue(0);
   const heightDimensions = useWindowDimensions().height / 2;
@@ -62,3 +62,5 @@ export const AnimatedBootSplash: FC<Props> = props => {
     </Animated.View>
   );
 };
+
+export default AnimatedBootSplash;

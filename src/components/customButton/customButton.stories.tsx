@@ -1,9 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
 import type {Meta, StoryObj} from '@storybook/react';
-import {CustomButton} from './customButton';
-import {CustomText} from '../customText/customText';
-import {color} from '../../styles/color.style';
+import {CustomButton} from './CustomButton';
+import {color} from '../../styles/color.styles';
+import CustomText from '../customText/CustomText';
 
 const meta = {
   title: 'CustomButton',

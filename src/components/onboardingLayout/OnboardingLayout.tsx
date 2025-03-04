@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {View} from 'react-native';
-import {CustomText} from '../../components';
-import styles from './onBoardingLayout.style';
+import styles from './OnboardingLayout.style';
+import CustomText from '../customText/CustomText';
 
 type Props = {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ type Props = {
   info: string;
 };
 
-export const OnBoardingLayout: FC<Props> = props => {
+const OnboardingLayout: FC<Props> = props => {
   return (
     <View style={styles.box}>
       <View style={styles.containerTitle}>
@@ -26,3 +26,5 @@ export const OnBoardingLayout: FC<Props> = props => {
     </View>
   );
 };
+
+export default OnboardingLayout;

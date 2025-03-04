@@ -1,10 +1,12 @@
 import React, {FC} from 'react';
 import {Image, View} from 'react-native';
-import styles from './signInScreen.style';
-import {CustomButton, CustomText} from '../components';
-import {CustomForm} from './components/customForm';
+import styles from './SignIn.styles';
+import { apple, facebook } from 'src/assets';
+import CustomButton from 'src/components/customButton/CustomButton';
+import CustomForm from 'src/components/customForm/CustomForm';
+import CustomText from 'src/components/customText/CustomText';
 
-export const SignInScreen: FC = () => {
+export const SignIn: FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.containerTitle}>
@@ -23,10 +25,10 @@ export const SignInScreen: FC = () => {
           <View style={styles.containerBadge}>
             <CustomButton
               style={[styles.buttonBadge, styles.buttonBadgeFacebook]}>
-              <Image source={require('../assets/badge/facebook.png')} />
+              <Image source={facebook} />
             </CustomButton>
             <CustomButton style={[styles.buttonBadge, styles.buttonBadgeApple]}>
-              <Image source={require('../assets/badge/apple.png')} />
+              <Image source={apple} />
             </CustomButton>
           </View>
         </View>

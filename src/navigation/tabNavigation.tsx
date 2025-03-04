@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { ChatScreen } from '../screen';
-
+import { Chat } from 'src/screens/chat/Chat';
 const Tab = createBottomTabNavigator();
 
 export const TabsNavigation: FC = () => {
@@ -10,7 +9,7 @@ export const TabsNavigation: FC = () => {
       initialRouteName="Chat"
       screenOptions={{ headerShown: false }}
     >
-      <Tab.Screen name="Chat" component={ChatScreen} />
+      <Tab.Screen name="Chat" component={Chat} />
     </Tab.Navigator>
   );
 };

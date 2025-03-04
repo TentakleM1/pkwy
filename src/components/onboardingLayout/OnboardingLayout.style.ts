@@ -1,5 +1,5 @@
+import { WIDTH_SCREEN } from 'src/constants/constant';
 import {StyleSheet} from 'react-native';
-import { WIDTH_SCREEN } from '../../constant/constant';
 
 const styles = StyleSheet.create({
   containerTitle: {
