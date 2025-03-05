@@ -12,7 +12,9 @@ module.exports = {
       'react-native-reanimated-carousel|' +
       'react-native-safe-area-context|' +
       'react-native-screens|' +
-      'react-native-video' +
+      'react-native-video|' +
+      'expo-location' +
       ')/)',
-  ]
+  ],
+  
 };
