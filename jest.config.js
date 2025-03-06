@@ -13,8 +13,15 @@ module.exports = {
       'react-native-safe-area-context|' +
       'react-native-screens|' +
       'react-native-video|' +
-      'expo-location' +
+      'expo|' +
+      'expo-location|' +
+      'expo-modules-core|' +
+      'react-native-maps' +
       ')/)',
   ],
-  
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+    },
+  },
 };
