@@ -10,7 +10,7 @@ import Map from 'src/screens/map/Map';
 const Stack = createNativeStackNavigator<AuthStackParamListType>();
 
 export const AuthNavigation: FC = () => {
-  const isOnboarding = getOnboardingStorage() ? Route.Video : Route.Onboarding;
+  const isOnboarding = getOnboardingStorage() ? Route.Map : Route.Onboarding;
 
   return (
     <Stack.Navigator initialRouteName={isOnboarding} screenOptions={{headerShown: false}}>

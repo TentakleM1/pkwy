@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {Image, View} from 'react-native';
 import styles from './SignIn.styles';
 import { apple, facebook } from 'src/assets';
-import CustomButton from 'src/components/customButton/CustomButton';
 import CustomForm from 'src/components/customForm/CustomForm';
 import CustomText from 'src/components/customText/CustomText';
+import CustomButton from 'src/components/customButton/CustomButton';
 
 const SignIn: FC = () => {
   return (

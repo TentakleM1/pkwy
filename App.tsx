@@ -3,7 +3,7 @@ import {RootNavigation} from './src/navigation/rootNaigation';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import StoryBook from './.storybook';
 import {STORYBOOK} from './config';
-import BootSplashLayout from 'src/components/bootSplashLayout/BootSplashLayout';
+import BootSplashLayout from 'src/components/bootSplashLayout/bootSplashLayout';
 
 const App = () => {
   return (

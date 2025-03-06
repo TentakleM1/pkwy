@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomText renders correctly with h1 style 1`] = `
+<Text
+  h1={true}
+  style={
+    [
+      {
+        "fontSize": 20,
+      },
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+    ]
+  }
+>
+  H1 Text
+</Text>
+`;
+
+exports[`CustomText renders correctly with h2 style 1`] = `
+<Text
+  h2={true}
+  style={
+    [
+      undefined,
+      {
+        "fontSize": 16,
+      },
+      undefined,
+      undefined,
+      undefined,
+    ]
+  }
+>
+  H2 Text
+</Text>
+`;
+
+exports[`CustomText renders correctly with no default props 1`] = `
+<Text
+  style={
+    [
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Default Text
+</Text>
+`;
+
+exports[`CustomText renders correctly with no heading props 1`] = `
+<Text
+  style={
+    [
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+      undefined,
+    ]
+  }
+>
+  Default Text
+</Text>
+`;

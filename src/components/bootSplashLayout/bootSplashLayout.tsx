@@ -1,7 +1,7 @@
 import React, {FC, useState} from 'react';
 import {View} from 'react-native';
 import styles from './BootSplashLayout.styles';
-import AnimatedBootSplash from '../animatedBootSplash/AnimatedBootSplash';
+import AnimatedBootSplash from '../animatedBootSplash/animatedBootSplash';
 
 type Props = {
   children: React.ReactNode;
