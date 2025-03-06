@@ -7,7 +7,6 @@ import MapView, {
   Region,
 } from 'react-native-maps';
 import * as Location from 'expo-location';
-import {PermissionStatus} from 'expo-location';
 import {DeviceZoom} from 'src/types/zoom';
 import {styles} from './InteractiveMap.styles';
 import {MapInteractionPanel} from './components/mapInteractionPanel/MapInteractionPanel';
@@ -35,21 +34,24 @@ const InteractiveMap: FC<Props> = props => {
   });
 
   useEffect(() => {
-    async function getCurrentLocation() {
-      let {status} = await Location.requestForegroundPermissionsAsync();
-      if (status !== PermissionStatus.GRANTED) {
-        console.log('Permission to access location was denied');
-        return;
+    const getCurrentLocation = async () => {
+      try {
+        const {status} = await Location.requestForegroundPermissionsAsync();
+        if (status !== 'granted') {
+          console.log('Permission to access location was denied');
+          return;
+        }
+        const currentPosition = await Location.getCurrentPositionAsync();
+        setLocation({
+          latitude: currentPosition.coords.latitude,
+          longitude: currentPosition.coords.longitude,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        });
+      } catch (error) {
+        console.error('Error getting location', error);
       }
-
-      const currentPosition = await Location.getCurrentPositionAsync();
-      setLocation({
-        latitude: currentPosition.coords.latitude,
-        longitude: currentPosition.coords.longitude,
-        latitudeDelta: 0,
-        longitudeDelta: 0,
-      });
-    }
+    };
 
     getCurrentLocation();
   }, []);
@@ -133,7 +135,9 @@ const InteractiveMap: FC<Props> = props => {
         showsMyLocationButton={false}>
         <Marker {...newMarker} />
         {markers.map((marker, index) => {
-          return <Marker key={`${marker.coordinate.latitude}${index}`} {...marker} />;
+          return (
+            <Marker key={`${marker.coordinate.latitude}${index}`} {...marker} />
+          );
         })}
       </MapView>
       <MapInteractionPanel

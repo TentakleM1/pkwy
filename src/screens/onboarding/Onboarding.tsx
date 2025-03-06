@@ -14,10 +14,10 @@ import {useNavigation} from '@react-navigation/native';
 import {onboardingOne, onboardingThree, onboardingTwo} from 'src/assets';
 import {AuthStackNavigation, Route} from 'src/types/navigation';
 import {HEIGHT_SCREEN, WIDTH_SCREEN} from 'src/constants/constant';
-import CustomButton from 'src/components/customButton/CustomButton';
-import CustomText from 'src/components/customText/CustomText';
+import CustomText from '../../components/customText/CustomText';
 import OnboardingLayout from 'src/components/onboardingLayout/OnboardingLayout';
 import {setOnboardingStorage} from 'src/utils/storage/onboarding';
+import CustomButton from 'src/components/customButton/CustomButton';
 
 const items: {url: number; title: string; info: string}[] = [
   {
